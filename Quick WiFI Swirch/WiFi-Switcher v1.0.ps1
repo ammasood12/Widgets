@@ -5,21 +5,31 @@
 # - Auto Retry on failed connection
 # - Manual Retry Option after failed attempts
 # --------------------------------
+# Bug
+# - Sometimes first try will cause network disable
+# - Auto Retry on failed connection
+# - Manual Retry Option after failed attempts
+# --------------------------------
 # How To Use?
 # Create a Shortcut with the following Command
+#
 # powershell.exe -ExecutionPolicy Bypass -File "C:\Path\To\WiFi-Switcher.ps1"
+#
+# - Start Minimized
+# After Making shortcut
+# Shortcut Link Properties >> RUN >> Minimized
 # --------------------------------
 
 # -------------------------------
 # CONFIGURATION SECTION
 # -------------------------------
 #Wifi Names list
-$wifiName1 = "Guest_Wifi_1"
-$wifiName2 = "Guest_Wifi_2"
+$wifiName1 = "Joey_AX56u_5G"
+$wifiName2 = "Joey_5G"
 $wifiList = @($wifiName1, $wifiName2)	#Add $wifiName3 etc. in the list after adding new WiFi variable
 
 $retryLimit = 3						#Auto Retry Limit
-$popupDurationMs = 2000				#Popup Duration Time
+$popupDurationMs = 1000				#Popup Duration Time
 
 # -------------------------------
 # Hide Console Window
@@ -34,7 +44,7 @@ if ($PSEdition -eq 'Desktop') {
 }
 
 # -------------------------------
-# Detect Current WiFi
+# Detect Current WiFi and Choose Next WiFi
 # -------------------------------
 function Get-ConnectedSSID {
     try {
@@ -109,7 +119,7 @@ function Attempt-Connection {
         netsh wlan disconnect | Out-Null
         Start-Sleep -Milliseconds 500
         netsh wlan connect name="$nextWifi" | Out-Null
-        Start-Sleep -Seconds 3
+        Start-Sleep -Milliseconds 500
 
         $connectedWifi = Get-ConnectedSSID
 
@@ -130,7 +140,7 @@ function Attempt-Connection {
                 $buttonRetry.Enabled = $true
                 return
             }
-            Start-Sleep -Seconds 2
+            Start-Sleep -Milliseconds 500
         }
     } while ($retryCount -lt $retryLimit)
 }
