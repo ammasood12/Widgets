@@ -7,8 +7,6 @@
 # --------------------------------
 # Bug
 # - Sometimes first try will cause network disable
-# - Auto Retry on failed connection
-# - Manual Retry Option after failed attempts
 # --------------------------------
 # How To Use?
 # Create a Shortcut with the following Command
