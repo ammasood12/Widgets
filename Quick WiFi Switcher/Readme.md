@@ -7,8 +7,6 @@ Features
 --------------------------------
 Bug
 - Sometimes first try will cause network disable
-- Auto Retry on failed connection
-- Manual Retry Option after failed attempts
 --------------------------------
 How To Use?
 Download File WiFi-Switcher-v1.0.ps1
